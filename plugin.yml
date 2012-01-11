@@ -1,0 +1,5 @@
+name: ThanksGiving
+main: de.endrikatz.thanksgiving.ThanksGiving
+version: 0.1
+description: Thanks for Giving!
+commands:
