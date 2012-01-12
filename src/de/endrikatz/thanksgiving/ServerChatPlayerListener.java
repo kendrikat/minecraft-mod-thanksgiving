@@ -1,6 +1,7 @@
 package de.endrikatz.thanksgiving;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -17,10 +18,21 @@ public class ServerChatPlayerListener extends PlayerListener {
 		kitCollection.init();
 	}
 
-	private void sendMessageFormatted(Player p, String msg) {
-		ChatColor RED = ChatColor.RED;
-		ChatColor WHITE = ChatColor.WHITE;
-		p.sendMessage(RED + "[Server] " + WHITE + msg);
+	private void sendMessageFormated(Player p, String msg, ChatColor C1,
+			ChatColor C2) {
+		p.sendMessage(C1 + "[Server] " + C2 + msg);
+	}
+
+	private void sendMessageNorm(Player p, String msg) {
+		sendMessageFormated(p, msg, ChatColor.GREEN, ChatColor.WHITE);
+	}
+
+	private void sendMessageLow(Player p, String msg) {
+		sendMessageFormated(p, msg, ChatColor.GREEN, ChatColor.GRAY);
+	}
+
+	private void sendMessageCrit(Player p, String msg) {
+		sendMessageFormated(p, msg, ChatColor.RED, ChatColor.WHITE);
 	}
 
 	public void onPlayerChat(PlayerChatEvent chat) {
@@ -30,10 +42,15 @@ public class ServerChatPlayerListener extends PlayerListener {
 		String msgLowCase = message.toLowerCase();
 
 		if (msgLowCase.contains("help") || msgLowCase.contains("#h")) {
-			sendMessageFormatted(p, " \"#g itemID\" [shortened /give command]");
-			sendMessageFormatted(p, " \"#h\" [this help screen]");
-			sendMessageFormatted(p, " \"#k\" [get a kit of different items]");
-			sendMessageFormatted(p, " \"#l\" [list of all available kits]");
+			sendMessageLow(p, "***********************************************");
+			sendMessageNorm(p, " Hi, this is the mighty ThanksGiving-MOD(tm)!");
+			sendMessageNorm(p, "COMMANDS:");
+			sendMessageNorm(p, " \"#g itemID\" [shortened /give command]");
+			sendMessageNorm(p, " \"#h\" [this help screen]");
+			sendMessageNorm(p, " \"#k\" [get a kit of different items]");
+			sendMessageNorm(p, " \"#l\" [list all available kits]");
+			sendMessageNorm(p, " \"#t name v1 .. vN\" [create a custom kit]");
+			sendMessageNorm(p, " \"#rm name \" [remove kit]");
 			chat.setCancelled(true);
 		}
 
@@ -43,9 +60,9 @@ public class ServerChatPlayerListener extends PlayerListener {
 				p.performCommand("give " + p.getDisplayName() + " " + itemId
 						+ " 64");
 			} catch (NumberFormatException e) {
-				sendMessageFormatted(p, "this isn't a number... stupid");
+				sendMessageCrit(p, "this isn't a number... stupid");
 			} catch (ArrayIndexOutOfBoundsException e) {
-				sendMessageFormatted(p, "usage: \"#g itemID\"");
+				sendMessageCrit(p, "usage: \"#g itemID\"");
 			}
 			chat.setCancelled(true);
 		}
@@ -65,17 +82,53 @@ public class ServerChatPlayerListener extends PlayerListener {
 						}
 					}
 				}
-				chat.setCancelled(true);
 
 			} catch (ArrayIndexOutOfBoundsException e) {
-				sendMessageFormatted(p,
+				sendMessageCrit(p,
 						"usage: \"#k kitname\" - see #l for list of all kits");
 			}
+			chat.setCancelled(true);
 		}
 
 		if (msgLowCase.contains("#l")) {
-			sendMessageFormatted(p, "kits: " + kitCollection.getNames());
-			sendMessageFormatted(p, "example: \"#k tools\"");
+			sendMessageNorm(p, "kits: " + kitCollection.getNames());
+			sendMessageNorm(p, "example: \"#k tools\"");
+			chat.setCancelled(true);
+		}
+
+		if (msgLowCase.contains("#t")) {
+
+			String[] split = message.split(" ");
+
+			if (split.length > 1
+					&& kitCollection.addCustomKit(Arrays.copyOfRange(split, 1,
+							split.length))) {
+				sendMessageNorm(p, "custom kit " + split[1] + " saved :)");
+			} else {
+				sendMessageCrit(p, "oh noes ... ");
+			}
+
+			chat.setCancelled(true);
+		}
+
+		if (msgLowCase.contains("#rm")) {
+			String[] split = message.split(" ");
+			Kit rm = null;
+
+			if (split.length > 1) {
+				ArrayList<Kit> kits = kitCollection.getCollection();
+
+				for (Kit kit : kits) {
+					if (kit.getName().contains(split[1])) {
+						rm = kit;
+						sendMessageNorm(p, "custom kit " + split[1]
+								+ " removed");
+					}
+				}
+				kits.remove(rm);
+			} else {
+				sendMessageCrit(p, "sup? ... ");
+			}
 			chat.setCancelled(true);
 		}
 
