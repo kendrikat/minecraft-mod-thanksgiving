@@ -9,7 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ThanksGiving extends JavaPlugin {
 
-	public static ThanksGiving plugin;
+	public static ThanksGiving plugin;	
 
 	public final Logger logger = Logger.getLogger("Minecraft");
 
