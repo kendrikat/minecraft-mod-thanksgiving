@@ -1,25 +1,45 @@
 package de.endrikatz.thanksgiving;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Kit {
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+
+public class Kit implements ConfigurationSerializable {
 
 	private String name = "empty";
 
-	private ArrayList<Integer> items = new ArrayList<Integer>();
+	private Map<String, Object> items = new HashMap<String, Object>();
 
-	public Kit(String string, int[] itemKitLeather) {
+	public Kit(String string, int[][] itemKitLeather) {
 		name = string;
-		for (int i : itemKitLeather) {
-			items.add(i);
+		for (int[] i : itemKitLeather) {
+			items.put(String.valueOf(i[0]), new Item(i));
 		}
 	}
 
-	public ArrayList<Integer> getItems() {
+	public Kit(Map<String, Object> map) {
+		this.items = (Map<String, Object>) map.get("items");
+		this.name = (String) map.get("name");
+	}
+
+	@Override
+	public Map<String, Object> serialize() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("items", this.items);
+		map.put("name", this.name);
+		return map;
+	}
+
+	public static Kit deserialize(Map<String, Object> map) {
+		return new Kit(map);
+	}
+
+	public Map<String, Object> getItems() {
 		return items;
 	}
 
-	public void setItems(ArrayList<Integer> items) {
+	public void setItems(Map<String, Object> items) {
 		this.items = items;
 	}
 
@@ -30,4 +50,5 @@ public class Kit {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 }

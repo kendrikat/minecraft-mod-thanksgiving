@@ -1,9 +1,10 @@
 package de.endrikatz.thanksgiving;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerListener;
@@ -49,7 +50,7 @@ public class ServerChatPlayerListener extends PlayerListener {
 			sendMessageNorm(p, " \"#h\" [this help screen]");
 			sendMessageNorm(p, " \"#k\" [get a kit of different items]");
 			sendMessageNorm(p, " \"#l\" [list all available kits]");
-			sendMessageNorm(p, " \"#t name v1 .. vN\" [create a custom kit]");
+			sendMessageNorm(p, " \"#t name v1:COUNT .. vN\" [create kit]");
 			sendMessageNorm(p, " \"#rm name \" [remove kit]");
 			chat.setCancelled(true);
 		}
@@ -70,19 +71,19 @@ public class ServerChatPlayerListener extends PlayerListener {
 		if (msgLowCase.contains("#k")) {
 			try {
 				String kitType = message.split(" ")[1];
-				ArrayList<Kit> kits = kitCollection.getCollection();
+				Map<String, Object> kits = kitCollection.getCollection();
 
-				for (Kit kit : kits) {
-					if (kitType.toLowerCase().contains(kit.getName())) {
-						ArrayList<Integer> items = kit.getItems();
+				if (kits.containsKey(kitType.toLowerCase())) {
+					Map<String, Object> items = ((Kit) kits.get(kitType
+							.toLowerCase())).getItems();
 
-						for (int i = 0; i < kit.getItems().size(); i++) {
-							p.performCommand("give " + p.getDisplayName() + " "
-									+ items.get(i) + " 1");
-						}
+					for (Object object : items.values()) {
+						p.performCommand("give " + p.getDisplayName() + " "
+								+ ((Item) object).getId() + " "
+								+ ((Item) object).getCount());
 					}
-				}
 
+				}
 			} catch (ArrayIndexOutOfBoundsException e) {
 				sendMessageCrit(p,
 						"usage: \"#k kitname\" - see #l for list of all kits");
@@ -104,33 +105,35 @@ public class ServerChatPlayerListener extends PlayerListener {
 					&& kitCollection.addCustomKit(Arrays.copyOfRange(split, 1,
 							split.length))) {
 				sendMessageNorm(p, "custom kit " + split[1] + " saved :)");
+				FileConfiguration config = plugin.getConfig();
+				config.set("kitCollection", kitCollection);
+				plugin.saveConfig();
+
 			} else {
 				sendMessageCrit(p, "oh noes ... ");
 			}
-
 			chat.setCancelled(true);
 		}
 
 		if (msgLowCase.contains("#rm")) {
 			String[] split = message.split(" ");
-			Kit rm = null;
 
 			if (split.length > 1) {
-				ArrayList<Kit> kits = kitCollection.getCollection();
+				Map<String, Object> kits = kitCollection.getCollection();
 
-				for (Kit kit : kits) {
-					if (kit.getName().contains(split[1])) {
-						rm = kit;
-						sendMessageNorm(p, "custom kit " + split[1]
-								+ " removed");
-					}
+				if (kits.containsKey(split[1])) {
+					kits.remove(split[1]);
+					sendMessageNorm(p, "custom kit " + split[1] + " removed");
 				}
-				kits.remove(rm);
+
 			} else {
 				sendMessageCrit(p, "sup? ... ");
 			}
 			chat.setCancelled(true);
 		}
+	}
 
+	public void setCollection(Object object) {
+		kitCollection = (KitCollection) object;
 	}
 }
