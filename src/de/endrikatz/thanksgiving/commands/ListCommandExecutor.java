@@ -22,7 +22,7 @@ public class ListCommandExecutor extends AbstractCommandExecutor {
 		}
 
 		sendMessageNorm(p, "kits: " + plugin.getKitCollection().getNames());
-		sendMessageNorm(p, "example: \"#k tools\"");
+		sendMessageNorm(p, "example: \"/k tools\"");
 
 		return true;
 	}

@@ -26,7 +26,7 @@ public class HelpCommandExecutor extends AbstractCommandExecutor {
 		sendMessageNorm(p, "COMMANDS:");
 		sendMessageNorm(p, " \"/g itemID\" [shortened /give command]");
 		sendMessageNorm(p, " \"/h\" [this help screen]");
-		sendMessageNorm(p, " \"/k\" [get a kit of different items]");
+		sendMessageNorm(p, " \"/k name\" [get a kit of different items]");
 		sendMessageNorm(p, " \"/l\" [list all available kits]");
 		sendMessageNorm(p, " \"/t name v1:COUNT .. vN\" [create kit]");
 		sendMessageNorm(p, " \"/rm name \" [remove kit]");
