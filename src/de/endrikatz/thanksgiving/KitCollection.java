@@ -10,6 +10,7 @@ public class KitCollection implements ConfigurationSerializable {
 
 	private HashMap<String, Object> collection = new HashMap<String, Object>();
 
+	@SuppressWarnings("unchecked")
 	public KitCollection(Map<String, Object> map) {
 		this.collection = (HashMap<String, Object>) map.get("collection");
 	}

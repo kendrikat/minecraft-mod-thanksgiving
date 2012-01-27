@@ -3,3 +3,31 @@ main: de.endrikatz.thanksgiving.ThanksGiving
 version: 0.1
 description: Thanks for Giving!
 commands:
+ g:
+  description: This is a demo command.
+  permission: ThanksGiving.g
+  usage: /<command> [id]
+ h:
+  description: This is a demo command.
+  permission: ThanksGiving.h
+  usage: /<command>
+ l:
+  description: This is a demo command.
+  permission: ThanksGiving.l
+  usage: /<command>
+ k:
+  description: This is a demo command.
+  permission: ThanksGiving.k
+  usage: /<command> [name]
+ c:
+  description: This is a demo command.
+  permission: ThanksGiving.c
+  usage: /<command> [name] [id:count] .. [id]
+ rm:
+  description: This is a demo command.
+  permission: ThanksGiving.rm
+  usage: /<command> [name]
+
+  
+  
+ 

@@ -11,13 +11,14 @@ public class Kit implements ConfigurationSerializable {
 
 	private Map<String, Object> items = new HashMap<String, Object>();
 
-	public Kit(String string, int[][] itemKitLeather) {
+	public Kit(String string, int[][] itemKit) {
 		name = string;
-		for (int[] i : itemKitLeather) {
+		for (int[] i : itemKit) {
 			items.put(String.valueOf(i[0]), new Item(i));
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public Kit(Map<String, Object> map) {
 		this.items = (Map<String, Object>) map.get("items");
 		this.name = (String) map.get("name");
