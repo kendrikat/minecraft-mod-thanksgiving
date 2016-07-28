@@ -2,7 +2,7 @@
 description: "Thanks for Giving - Create, save and get kits of different items!"
 main: de.endrikatz.thanksgiving.ThanksGiving
 name: ThanksGiving
-version: 1.7.2
+version: 1.10.2
 commands:
   c:
     description: "Create a new kit"
