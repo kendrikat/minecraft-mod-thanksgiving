@@ -15,57 +15,54 @@ import de.endrikatz.thanksgiving.commands.RemoveCommandExecutor;
 
 public class ThanksGiving extends JavaPlugin {
 
-	public static ThanksGiving plugin;
-	public final Logger logger = Logger.getLogger("Minecraft");
+    public static ThanksGiving plugin;
+    public final Logger logger = Logger.getLogger("Minecraft");
 
-	private GivingCommandExecutor giveExecutor = new GivingCommandExecutor(this);
-	private HelpCommandExecutor helpExecutor = new HelpCommandExecutor(this);
-	private ListCommandExecutor listExecutor = new ListCommandExecutor(this);
-	private KitCommandExecutor kitExecutor = new KitCommandExecutor(this);
-	private CreateCommandExecutor createExecutor = new CreateCommandExecutor(
-			this);
-	private RemoveCommandExecutor removeExecutor = new RemoveCommandExecutor(
-			this);
+    private GivingCommandExecutor giveExecutor = new GivingCommandExecutor(this);
+    private HelpCommandExecutor helpExecutor = new HelpCommandExecutor(this);
+    private ListCommandExecutor listExecutor = new ListCommandExecutor(this);
+    private KitCommandExecutor kitExecutor = new KitCommandExecutor(this);
+    private CreateCommandExecutor createExecutor = new CreateCommandExecutor(this);
+    private RemoveCommandExecutor removeExecutor = new RemoveCommandExecutor(this);
 
-	private String conf = "kitCollection";
-	private KitCollection kitCollection = new KitCollection();
+    private String conf = "kitCollection";
+    private KitCollection kitCollection = new KitCollection();
 
-	static {
-		ConfigurationSerialization.registerClass(KitCollection.class);
-		ConfigurationSerialization.registerClass(Kit.class);
-		ConfigurationSerialization.registerClass(Item.class);
-	}
+    static {
+        ConfigurationSerialization.registerClass(KitCollection.class);
+        ConfigurationSerialization.registerClass(Kit.class);
+        ConfigurationSerialization.registerClass(Item.class);
+    }
 
-	@Override
-	public void onDisable() {
-		PluginDescriptionFile pdfFile = this.getDescription();
-		this.logger.info(pdfFile.getName() + " is now disabled.");
-	}
+    @Override
+    public void onDisable() {
+        PluginDescriptionFile pdfFile = this.getDescription();
+        this.logger.info(pdfFile.getName() + " is now disabled.");
+    }
 
-	@Override
-	public void onEnable() {
-		PluginDescriptionFile pdfFile = this.getDescription();
-		this.logger.info(pdfFile.getName() + " version " + pdfFile.getVersion()
-				+ " is now enabled.");
+    @Override
+    public void onEnable() {
+        PluginDescriptionFile pdfFile = this.getDescription();
+        this.logger.info(pdfFile.getName() + " version " + pdfFile.getVersion() + " is now enabled.");
 
-		if (this.getConfig().contains(conf)) {
-			this.setKitCollection((KitCollection) this.getConfig().get(conf));
-		}
+        if (this.getConfig().contains(conf)) {
+            this.setKitCollection((KitCollection) this.getConfig().get(conf));
+        }
 
-		getCommand("g").setExecutor(giveExecutor);
-		getCommand("h").setExecutor(helpExecutor);
-		getCommand("l").setExecutor(listExecutor);
-		getCommand("k").setExecutor(kitExecutor);
-		getCommand("c").setExecutor(createExecutor);
-		getCommand("rm").setExecutor(removeExecutor);
+        getCommand("g").setExecutor(giveExecutor);
+        getCommand("h").setExecutor(helpExecutor);
+        getCommand("l").setExecutor(listExecutor);
+        getCommand("k").setExecutor(kitExecutor);
+        getCommand("c").setExecutor(createExecutor);
+        getCommand("rm").setExecutor(removeExecutor);
 
-	}
+    }
 
-	public KitCollection getKitCollection() {
-		return kitCollection;
-	}
+    public KitCollection getKitCollection() {
+        return kitCollection;
+    }
 
-	public void setKitCollection(KitCollection kitCollection) {
-		this.kitCollection = kitCollection;
-	}
+    public void setKitCollection(KitCollection kitCollection) {
+        this.kitCollection = kitCollection;
+    }
 }

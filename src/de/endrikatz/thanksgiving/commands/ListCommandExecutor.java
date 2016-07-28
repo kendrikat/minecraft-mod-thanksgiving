@@ -8,22 +8,21 @@ import de.endrikatz.thanksgiving.ThanksGiving;
 
 public class ListCommandExecutor extends AbstractCommandExecutor {
 
-	public ListCommandExecutor(ThanksGiving plugin) {
-		this.plugin = plugin;
-	}
+    public ListCommandExecutor(ThanksGiving plugin) {
+        this.plugin = plugin;
+    }
 
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd,
-			String cmdLabel, String[] args) {
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String cmdLabel, String[] args) {
 
-		Player p = null;
-		if (sender instanceof Player) {
-			p = (Player) sender;
-		}
+        Player p = null;
+        if (sender instanceof Player) {
+            p = (Player) sender;
+        }
 
-		sendMessageNorm(p, "kits: " + plugin.getKitCollection().getNames());
-		sendMessageNorm(p, "example: \"/k tools\"");
+        sendMessageNorm(p, "kits: " + plugin.getKitCollection().getNames());
+        sendMessageNorm(p, "example: \"/k tools\"");
 
-		return true;
-	}
+        return true;
+    }
 }

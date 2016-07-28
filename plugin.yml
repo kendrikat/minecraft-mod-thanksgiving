@@ -1,33 +1,31 @@
-name: ThanksGiving
+---
+description: "Thanks for Giving - Create, save and get kits of different items!"
 main: de.endrikatz.thanksgiving.ThanksGiving
-version: 0.1
-description: Thanks for Giving!
+name: ThanksGiving
+version: 1.7.2
 commands:
- g:
-  description: This is a demo command.
-  permission: ThanksGiving.g
-  usage: /<command> [id]
- h:
-  description: This is a demo command.
-  permission: ThanksGiving.h
-  usage: /<command>
- l:
-  description: This is a demo command.
-  permission: ThanksGiving.l
-  usage: /<command>
- k:
-  description: This is a demo command.
-  permission: ThanksGiving.k
-  usage: /<command> [name]
- c:
-  description: This is a demo command.
-  permission: ThanksGiving.c
-  usage: /<command> [name] [id:count] .. [id]
- rm:
-  description: This is a demo command.
-  permission: ThanksGiving.rm
-  usage: /<command> [name]
+  c:
+    description: "Create a new kit"
+    permission: ThanksGiving.c
+    usage: "/<command> [name] [id:count] .. [id]"
+  g:
+    description: "Shortened /give command"
+    permission: ThanksGiving.g
+    usage: "/<command> [id]"
+  h:
+    description: "This help screen"
+    permission: ThanksGiving.h
+    usage: /<command>
+  k:
+    description: "Get a kit of different items"
+    permission: ThanksGiving.k
+    usage: "/<command> [name]"
+  l:
+    description: "List all available kits"
+    permission: ThanksGiving.l
+    usage: /<command>
+  rm:
+    description: "Remove an existing kit"
+    permission: ThanksGiving.rm
+    usage: "/<command> [name]"
 
-  
-  
- 

@@ -7,49 +7,49 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 public class Kit implements ConfigurationSerializable {
 
-	private String name = "empty";
+    private String name = "empty";
 
-	private Map<String, Object> items = new HashMap<String, Object>();
+    private Map<String, Object> items = new HashMap<String, Object>();
 
-	public Kit(String string, int[][] itemKit) {
-		name = string;
-		for (int[] i : itemKit) {
-			items.put(String.valueOf(i[0]), new Item(i));
-		}
-	}
+    public Kit(String string, int[][] itemKit) {
+        name = string;
+        for (int[] i : itemKit) {
+            items.put(String.valueOf(i[0]), new Item(i));
+        }
+    }
 
-	@SuppressWarnings("unchecked")
-	public Kit(Map<String, Object> map) {
-		this.items = (Map<String, Object>) map.get("items");
-		this.name = (String) map.get("name");
-	}
+    @SuppressWarnings("unchecked")
+    public Kit(Map<String, Object> map) {
+        this.items = (Map<String, Object>) map.get("items");
+        this.name = (String) map.get("name");
+    }
 
-	@Override
-	public Map<String, Object> serialize() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("items", this.items);
-		map.put("name", this.name);
-		return map;
-	}
+    @Override
+    public Map<String, Object> serialize() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("items", this.items);
+        map.put("name", this.name);
+        return map;
+    }
 
-	public static Kit deserialize(Map<String, Object> map) {
-		return new Kit(map);
-	}
+    public static Kit deserialize(Map<String, Object> map) {
+        return new Kit(map);
+    }
 
-	public Map<String, Object> getItems() {
-		return items;
-	}
+    public Map<String, Object> getItems() {
+        return items;
+    }
 
-	public void setItems(Map<String, Object> items) {
-		this.items = items;
-	}
+    public void setItems(Map<String, Object> items) {
+        this.items = items;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
 }

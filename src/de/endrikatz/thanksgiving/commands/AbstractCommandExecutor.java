@@ -8,22 +8,21 @@ import de.endrikatz.thanksgiving.ThanksGiving;
 
 public abstract class AbstractCommandExecutor implements CommandExecutor {
 
-	protected ThanksGiving plugin;
-	
-	private void sendMessageFormated(Player p, String msg, ChatColor C1,
-			ChatColor C2) {
-		p.sendMessage(C1 + "[Server] " + C2 + msg);
-	}
+    protected ThanksGiving plugin;
 
-	protected void sendMessageNorm(Player p, String msg) {
-		sendMessageFormated(p, msg, ChatColor.GREEN, ChatColor.WHITE);
-	}
+    private void sendMessageFormated(Player p, String msg, ChatColor C1, ChatColor C2) {
+        p.sendMessage(C1 + "[Server] " + C2 + msg);
+    }
 
-	protected void sendMessageLow(Player p, String msg) {
-		sendMessageFormated(p, msg, ChatColor.GREEN, ChatColor.GRAY);
-	}
+    protected void sendMessageNorm(Player p, String msg) {
+        sendMessageFormated(p, msg, ChatColor.GREEN, ChatColor.WHITE);
+    }
 
-	protected void sendMessageCrit(Player p, String msg) {
-		sendMessageFormated(p, msg, ChatColor.RED, ChatColor.WHITE);
-	}
+    protected void sendMessageLow(Player p, String msg) {
+        sendMessageFormated(p, msg, ChatColor.GREEN, ChatColor.GRAY);
+    }
+
+    protected void sendMessageCrit(Player p, String msg) {
+        sendMessageFormated(p, msg, ChatColor.RED, ChatColor.WHITE);
+    }
 }
