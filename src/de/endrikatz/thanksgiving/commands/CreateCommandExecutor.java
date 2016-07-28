@@ -1,13 +1,12 @@
 package de.endrikatz.thanksgiving.commands;
 
-import java.util.Arrays;
-
+import de.endrikatz.thanksgiving.ThanksGiving;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import de.endrikatz.thanksgiving.ThanksGiving;
+import java.util.Arrays;
 
 public class CreateCommandExecutor extends AbstractCommandExecutor {
 
@@ -37,4 +36,6 @@ public class CreateCommandExecutor extends AbstractCommandExecutor {
 
         return true;
     }
+
+
 }

@@ -11,10 +11,11 @@ public class Kit implements ConfigurationSerializable {
 
     private Map<String, Object> items = new HashMap<String, Object>();
 
-    public Kit(String string, int[][] itemKit) {
+    public Kit(String string, String[][] itemKit) {
         name = string;
-        for (int[] i : itemKit) {
-            items.put(String.valueOf(i[0]), new Item(i));
+        for (String[] i : itemKit) {
+
+            items.put(i[0], new Item(i));
         }
     }
 

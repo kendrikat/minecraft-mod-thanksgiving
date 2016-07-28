@@ -7,27 +7,22 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 public class Item implements ConfigurationSerializable {
 
-    private int id;
+    private String id;
     private int count;
 
-    public Item(int i, int j) {
-        this.id = i;
-        this.count = j;
-    }
-
-    public Item(int[] i) {
+    public Item(String[] i) {
         this.id = i[0];
-        this.count = i[1];
+        this.count = Integer.parseInt(i[1]);
     }
 
     public Item(Map<String, Object> map) {
-        this.id = (Integer) map.get("id");
+        this.id = (String) map.get("id");
         this.count = (Integer) map.get("count");
     }
 
     @Override
     public Map<String, Object> serialize() {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("id", this.id);
         map.put("count", this.count);
         return map;
@@ -37,11 +32,11 @@ public class Item implements ConfigurationSerializable {
         return new Item(map);
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,14 +1,14 @@
 package de.endrikatz.thanksgiving;
 
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
-
 public class KitCollection implements ConfigurationSerializable {
 
-    private HashMap<String, Object> collection = new HashMap<String, Object>();
+    private HashMap<String, Object> collection = new HashMap<>();
 
     @SuppressWarnings("unchecked")
     public KitCollection(Map<String, Object> map) {
@@ -20,7 +20,7 @@ public class KitCollection implements ConfigurationSerializable {
 
     @Override
     public Map<String, Object> serialize() {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("collection", this.collection);
         return map;
     }
@@ -44,16 +44,15 @@ public class KitCollection implements ConfigurationSerializable {
     public boolean addCustomKit(String[] split) {
 
         try {
-            int[][] items = new int[split.length - 1][2];
+            String[][] items = new String[split.length - 1][2];
 
             for (int j = 0; j < split.length - 1; j++) {
-                String[] val = new String[2];
-                val = split[j + 1].split(":");
-                items[j][0] = Integer.parseInt(val[0]);
+                String[] val = split[j + 1].split("#");
+                items[j][0] = val[0];
                 if (val.length == 2) {
-                    items[j][1] = Integer.parseInt(val[1]);
+                    items[j][1] = val[1];
                 } else {
-                    items[j][1] = 64;
+                    items[j][1] = "64";
                 }
             }
 

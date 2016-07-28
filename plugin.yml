@@ -7,11 +7,12 @@ commands:
   c:
     description: "Create a new kit"
     permission: ThanksGiving.c
-    usage: "/<command> [name] [id:count] .. [id]"
+    usage: "/<command> [name] [minecraft:material#count] .. [minecraft:material]"
   g:
     description: "Shortened /give command"
     permission: ThanksGiving.g
-    usage: "/<command> [id]"
+    tab-complete: 1
+    usage: "/<command> [minecraft:material]"
   h:
     description: "This help screen"
     permission: ThanksGiving.h
